@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+
+  const navigate = useNavigate();
 
   const postData = async () => {
     try {
@@ -22,6 +25,8 @@ const Login = () => {
     } catch (error) {
       // Handle errors here
       console.error(error);
+    } if ((Response.status = 200)) {
+      navigate("/search");
     }
   };
 

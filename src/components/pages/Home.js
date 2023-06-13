@@ -5,6 +5,7 @@ import Login from "../Login";
 export default function Home () {
   return (
     <div>
+      <div className='loginHeader'>Login</div>
       <section className="section">
               <Login />
       </section>
