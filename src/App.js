@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Search from './components/pages/Search';
+import Search from './components/pages/Search';
 import Home from './components/pages/Home';
 import 'semantic-ui-css/semantic.min.css';
 import Nav from './components/protected';
@@ -22,7 +22,7 @@ return (
           path="/search"
           element={
             <Nav isLoggedIn={isLoggedIn}>
-              {/* <Search /> */}
+              <Search />
             </Nav>
           }
         />

@@ -7,12 +7,12 @@
   align-items: center;
   height: 100vh;
   font-family: 'Gloria Hallelujah', cursive;
-  background-color: rgb(215, 173, 94);
-  color: rgb(125, 94, 32);
+  background-color: #d7ad5e;
+  color: #4d1770;
 }
 
 .loginHeader {
-  font-size: 30px;
+  font-size: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,4 +26,22 @@
   color: rgb(255, 255, 255) !important;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 16px !important;
+}
+
+.header {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footerText {
+  font-size: 15px;
+}
+
+.headerText {
+  font-size: 20px;
+  float: left;
+  color: white;
 }
