@@ -45,3 +45,13 @@
   float: left;
   color: white;
 }
+
+.name {
+  padding: 5px;
+}
+
+.logout-btn {
+  float: left;
+  display: flex;
+  flex-direction: row;
+}

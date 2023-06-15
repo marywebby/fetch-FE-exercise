@@ -1,7 +1,10 @@
 import React from "react";
+import Card from "../Card"
 
 const Search = () => {
   return (
+    <div>
+        <Card/>
     <footer
       style={{
         position: "fixed",
@@ -17,6 +20,7 @@ const Search = () => {
         © 2023{" "}
       </p>
     </footer>
+    </div>
   );
 };
 
