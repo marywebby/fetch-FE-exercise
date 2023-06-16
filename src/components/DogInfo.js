@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 
-export default function DogCard(props) {
+export default function DogInfo(props) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PetsIcon from '@mui/icons-material/Pets';
 
 const Header = () => {
     return (
@@ -14,7 +15,8 @@ const Header = () => {
         }}
       >
         <p className="headerText is-flex is-justify-content-center is-align-items-center">
-          Fetch-a-Friend{" "}
+          Fetch-a-Friend 
+           <PetsIcon/>
         </p>
       </header>
     );
