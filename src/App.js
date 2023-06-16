@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Search from './components/pages/Search';
 import Home from './components/pages/Home';
 import 'semantic-ui-css/semantic.min.css';
+import SearchPage from './components/pages/SearchPage';
 // import Nav from './components/protected';
 
 function App() { 
@@ -20,7 +20,7 @@ return (
         />
         <Route
           path="/search"
-          element={<Search />}
+          element={<SearchPage />}
         />
       </Routes>
     </div>

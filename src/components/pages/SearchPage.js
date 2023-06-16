@@ -1,10 +1,12 @@
 import React from "react";
-import Card from "../Card"
+import Search from "../Search"
+import Header from "../Header";
 
-const Search = () => {
+const SearchPage = () => {
   return (
     <div>
-        <Card/>
+        <Header/>
+        <Search/>
     <footer
       style={{
         position: "fixed",
@@ -24,4 +26,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchPage;
