@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DogCard from './DogCard';
 import authAxios from "../utils/authAxios";
 import { Button } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
@@ -114,6 +115,7 @@ export default function Search() {
       >
         Dog Search
       </Button>
+      <DogCard/>
     </div>
   );
 
