@@ -7,8 +7,18 @@ import { CardActionArea } from '@mui/material';
 
 
 export default function Dog(props) {
+ const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 450,
+    bgcolor: "#fff",
+    boxShadow: 25,
+    };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={style}>
       <CardActionArea>
         <CardMedia
           component="img"

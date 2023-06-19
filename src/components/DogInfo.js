@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import { React, useEffect, useState, useReducer} from 'react';
 import Dog from './Dog';
 import authAxios from '../utils/authAxios';
 import {
@@ -14,31 +14,86 @@ import {
   Typography,
 } from "@mui/material";;
 
-export default function DogInfo(props) {
+const DogInfo = (props) => {
+const [dogs, setDogs] = useState([]);
+const [dogSelect, setDogSelect] = useState([]);
+const [dogMatch, setDogMatch] = useState({
+  id: "",
+  img: "",
+  name: "",
+  age: 0,
+  zip_code: 0,
+  breed: "",
+  city: "",
+  state: "",
+});
 
-  const [dogs, setDogs] = useState([]);
-  const [dogSelect, setDogSelect] = useState([]);
-  const [dogMatch, setDogMatch] = useState({
-    id: "",
-    img: "",
-    name: "",
-    age: 0,
-    zip_code: 0,
-    breed: "",
-    city: "",
-    state: "",
-  });
+ // handling open
+const initialState = {
+  open: false,
+};
 
-  // handling open
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'OPEN':
+      return { ...state, open: true };
+    case 'CLOSE':
+      return { ...state, open: false };
+    default:
+      return state;
+  }
+};
+
+const [open, dispatch] = useReducer(reducer, initialState);
+const handleOpen = () => dispatch({ type: 'OPEN' });
+const handleClose = () => dispatch({ type: 'CLOSE' });
+
+// getting the cities
+   // convert zip_codes to city and state
+   const getCities = (data) => {
+    const differentZips = [...new Set(data.map((item) => item.zip_code))];
+    return authAxios()
+      .post(`/locations`, differentZips)
+      .then((res) => {
+        return data.map((item) => {
+          let locationMatch = res.data.filter((loc) =>
+            loc !== null ? loc.zip_code === item.zip_code : false
+          )[0];
+          if (locationMatch === undefined) {
+            item["city"] = "Zip Code";
+            item["state"] = item.zip_code;
+          } else {
+            item["city"] = locationMatch.city;
+            item["state"] = locationMatch.state;
+          }
+          return item;
+        });
+      });
+  };
+
+
+  // setting the match of the dogs 
+  const onMatch = () => {
+    authAxios()
+      .post(`/dogs/match`, dogSelect)
+      .then((res) => {
+        authAxios()
+          .post(`/dogs`, [res.data.match])
+          .then((res) => {
+            getCities(res.data).then((dog) => setDogMatch(dog[0]));
+            handleOpen();
+          })
+          .catch((err) => console.log({ err }));
+      });
+  };
 
    // use search results to fetch queried dogs
    useEffect(() => {
     authAxios()
       .post(`/dogs`, props.dogResults.resultIds)
-      .then((dogs) => setDogs(dogs))
+      .then((res) => {
+        getCities(res.data).then((dogs) => setDogs(dogs));
+      })
       .catch((err) => console.log({ err }));
   }, [props.dogResults]);
 
@@ -54,6 +109,15 @@ export default function DogInfo(props) {
 
   return (
     <Box>
+      <Container>
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={onMatch}
+            sx={{ my: "2%" }}
+          >
+            match me!
+          </Button>
     <Dog dogMatch={dogMatch} open={open} handleClose={handleClose} />
     <Grid
             container
@@ -65,7 +129,7 @@ export default function DogInfo(props) {
             sx={{ mb: "5%" }}
           >
             {dogs.map((dog) => (
-              <Grid item xs={7.5} sm={7.5} md={5} lg={3} xl={3}>
+              <Grid key={dog.id} item xs={7.5} sm={7.5} md={5} lg={3} xl={3}>
                 <Card>
                   <CardMedia
                     component="img"
@@ -89,9 +153,9 @@ export default function DogInfo(props) {
                     >
                       My name is <b>{dog.name}</b>! I'm a(n) <b>{dog.age}</b>{" "}
                       year old <b>{dog.breed}</b>. I live in{" "}
-                      {/* <b>
+                      <b>
                         {dog.city} {dog.state}
-                      </b> */}
+                      </b>
                       !
                     </Typography>
                   </CardContent>
@@ -112,7 +176,9 @@ export default function DogInfo(props) {
               </Grid>
             ))}
           </Grid>
+          </Container>
         </Box>
-
   );
 }
+
+export default DogInfo;

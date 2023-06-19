@@ -3,6 +3,7 @@ import './index.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/pages/Home';
 import 'semantic-ui-css/semantic.min.css';
+// import DogCard from './components/pages/SearchPage';
 import SearchPage from './components/pages/SearchPage';
 // import Nav from './components/protected';
 
@@ -20,7 +21,7 @@ return (
         />
         <Route
           path="/search"
-          element={<SearchPage />}
+          element={<SearchPage/>}
         />
       </Routes>
     </div>

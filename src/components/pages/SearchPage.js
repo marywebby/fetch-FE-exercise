@@ -1,12 +1,14 @@
 import React from "react";
-import Search from "../Search"
+// import Search from "../Search"
 import Header from "../Header";
+import DogCard from "../DogCard";
 
 const SearchPage = () => {
   return (
     <div>
-        <Header/>
-        <Search/>
+        {/* <Header/> */}
+        <DogCard/>
+        {/* <Search/> */}
     <footer
       style={{
         position: "fixed",
